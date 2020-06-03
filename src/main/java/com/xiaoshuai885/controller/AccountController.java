@@ -19,42 +19,53 @@ public class AccountController {
 
     @RequestMapping("/findAll")
     public String findAll(Model model) {
-        System.out.println("表现层：查询所有的信息方法执行……");
+        System.out.println("Controller层：findAll方法执行……");
+        //调用service层的方法
         List<Account> accounts = accountService.findAll();
         model.addAttribute("accounts",accounts);
         return "list";
     }
 
     @RequestMapping("/save")
-    public void saveAccount(Account account,
-        HttpServletRequest request, HttpServletResponse response) throws Exception{
-        System.out.println("表现层：保存账户方法执行……");
+    public void save(Account account,
+                     HttpServletRequest request, HttpServletResponse response) throws Exception {
+        System.out.println("Controller层：save方法执行……");
+        //调用service层的方法
         accountService.saveAccount(account);
         response.sendRedirect(request.getContextPath()+"/account/findAll");
     }
 
     @RequestMapping("/delete")
-    public void deleteAccount(Integer id,
-        HttpServletRequest request, HttpServletResponse response) throws Exception{
-        System.out.println("表现层：删除账户方法执行……");
-        if (accountService.findId(id) != null) {
-            accountService.deleteAccountById(id);
-            response.sendRedirect(request.getContextPath()+"/account/findAll");
-        }else{
-            response.getWriter().print("Id invalid");
-        }
+    public void deleteAccountById(Integer id,
+                                  HttpServletRequest request, HttpServletResponse response) throws Exception{
+        System.out.println("Controller层：deleteAccountById方法执行……");
+        accountService.deleteAccountById(id);
+        System.out.println(request.getContextPath());
+        response.sendRedirect(request.getContextPath()+"/account/findAll");
     }
 
     @RequestMapping("/update")
-    public void updateAccountById(Account account,
-        HttpServletRequest request, HttpServletResponse response) throws Exception {
-        System.out.println("表现层：更新账户方法执行");
-        //判断id是否有效
-        if (accountService.findId(account.getId()) != null) {
-            accountService.updateAccountById(account);
+    public void updateAccount(Account account,
+                              HttpServletRequest request, HttpServletResponse response) throws Exception{
+        if (account.getId() == null) {
             response.sendRedirect(request.getContextPath()+"/account/findAll");
         }else{
-            response.getWriter().print("Id invalid");
+            if (account.getName() == "" || account.getMoney() == null) {
+                Account old = accountService.selectAccount(account.getId());
+                if (account.getName() == "") {
+                    System.out.println("name is null !");
+                    //使用旧账户的名字
+                    account.setName(old.getName());
+                }
+                if (account.getMoney() == null) {
+                    System.out.println("money is null !");
+                    //使用旧账户的钱
+                    account.setMoney(old.getMoney());
+                }
+            }
+            System.out.println("Controller层：updateAccount方法执行……");
+            accountService.updateAccountById(account);
+            response.sendRedirect(request.getContextPath()+"/account/findAll");
         }
     }
 }

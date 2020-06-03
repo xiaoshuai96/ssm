@@ -34,7 +34,7 @@ public class AccountServiceImpl implements IAccountService {
     }
 
     @Override
-    public Account findId(Integer id) {
-        return dao.findId(id);
+    public Account selectAccount(Integer id) {
+        return dao.selectAccount(id);
     }
 }

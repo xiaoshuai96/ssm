@@ -2,6 +2,9 @@ package com.xiaoshuai885.domain;
 
 import java.io.Serializable;
 
+/**
+ * 账户实体类
+ */
 public class Account implements Serializable {
     private Integer id;
     private String name;
@@ -33,10 +36,8 @@ public class Account implements Serializable {
 
     @Override
     public String toString() {
-        return "Account{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", money=" + money +
-                '}';
+        return "id: " + id +
+                "------- name: " + name +
+                "------- money: " + money ;
     }
 }

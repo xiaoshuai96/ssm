@@ -12,28 +12,26 @@
     http://www.springframework.org/schema/aop/spring-aop.xsd
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
-    <!--开启注解扫描,只处理Service and dao ,controller不需要spring来处理-->
+    <!--开启spring注解扫描-->
     <context:component-scan base-package="com.xiaoshuai885">
-        <!--配置哪些注解不扫描-->
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
     <!--spring整合mybatis-->
     <!--配置连接池-->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
-        <property name="jdbcUrl" value="jdbc:mysql:///ssm"/>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/ssm"/>
         <property name="user" value="root"/>
         <property name="password" value="221604"/>
     </bean>
-    <!--配置SqlSessionFactory工厂-->
-    <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <!--配置SqlSessionFactory对象-->
+    <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <!--配置IAccountDao所在的包-->
-    <bean id="mapper" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <!--配置AccountDao所在的位置-->
+    <bean id="scannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.xiaoshuai885.dao"/>
     </bean>
-
 
     <!--配置事务管理器-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -44,13 +42,12 @@
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
             <tx:method name="find*" read-only="true"/>
-            <tx:method name="*" isolation="DEFAULT"/>
         </tx:attributes>
     </tx:advice>
 
     <!--配置aop增强-->
     <aop:config>
-        <aop:pointcut id="exp" expression="execution(* com.xiaoshuai885.service.impl.*.*(..))"/>
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="exp"/>
+        <aop:pointcut id="expression" expression="execution(* com.xiaoshuai885.service.impl.*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="expression"/>
     </aop:config>
 </beans>

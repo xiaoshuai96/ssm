@@ -51,5 +51,5 @@ public interface IAccountDao {
      * @return
      */
     @Select("select * from account where id = #{id}")
-    public Account findId(Integer id);
+    public Account selectAccount(Integer id);
 }
