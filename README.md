@@ -296,7 +296,7 @@ tags: ssm
 	
 	<!-- 指定映射文件位置，因为在接口中直接使用了注解的方式编写sql语句 -->
 	<mappers>
-		<mapper class="com.itheima.dao.IAccountDao"/>
+		<mapper class="com.xiaoshuai885.dao.IAccountDao"/>
 	</mappers>
 	</configuration> 
 
@@ -328,7 +328,7 @@ tags: ssm
     </bean>
     <!--配置AccountDao所在的包-->
     <bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="cn.itcast.dao"/>
+        <property name="basePackage" value="cn.xiaoshuai885.dao"/>
     </bean>  
 ## 8.配置事务管理  
 	<!--配置Spring框架声明式事务管理-->
