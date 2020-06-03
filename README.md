@@ -305,7 +305,7 @@ tags: ssm
 	jdbc.driver=com.mysql.jdbc.Driver 
 	jdbc.url=jdbc:mysql://localhost:3306/ssm 
 	jdbc.username=root 
-	jdbc.password=root 
+	jdbc.password=
 ### 6.2 *编写测试类测试mybatis框架是否和数据库正常交互*  
 ## 7.Spring整合Mybatis框架
 ### 7.1 *整合成功的依据*  
@@ -320,7 +320,7 @@ tags: ssm
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
         <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/ssm"/>
         <property name="user" value="root"/>
-        <property name="password" value="221604"/>
+        <property name="password" value="******"/>
     </bean>
     <!--配置sqlSessionFactory工厂-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
