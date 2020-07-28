@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoshuai885.dao.IAccountDao">
+    
+    <resultMap id="accountMap" type="com.xiaoshuai885.domain.Account">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="money" column="money"/>
+    </resultMap>
+    <select id="findAll" resultMap="accountMap">
+        select * from account
+    </select>
+
+    <select id="selectAccount" parameterType="Integer">
+        select * from account where id = #{id}
+    </select>
+
+    <insert id="saveAccount" parameterType="com.xiaoshuai885.domain.Account">
+        insert into account (name,money) values(#{name},#{money})
+    </insert>
+
+    <delete id="deleteAccountById" parameterType="Integer">
+        delete from account where id = #{id}
+    </delete>
+
+    <update id="updateAccountById" parameterType="com.xiaoshuai885.domain.Account">
+        update account set name = #{name},money = #{money} where id = #{id}
+    </update>
+
+
+
+</mapper>
