@@ -27,6 +27,7 @@
     <!--配置SqlSessionFactory对象-->
     <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath*:mapper/*Mapper.xml"/>
     </bean>
     <!--配置AccountDao所在的位置-->
     <bean id="scannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">

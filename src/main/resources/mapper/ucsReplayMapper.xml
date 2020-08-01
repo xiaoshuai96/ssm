@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xiaoshuai885.dao.ucsReplayMapper">
+
+    <resultMap id="replayMap" type="com.xiaoshuai885.domain.userCserviceReplay">
+        <result property="id" column="id"/>
+        <result property="nsuserId" column="nsuser_id"/>
+        <result property="text" column="text"/>
+        <result property="replayTime" column="replay_time"/>
+        <result property="lastId" column="last_id"/>
+    </resultMap>
+
+    <select id="getFirstMessage" resultMap="replayMap" parameterType="long">
+        SELECT
+            *
+        FROM
+            user_cservice_replay
+        WHERE
+            1 = 1
+          AND last_id is null
+          AND nsuser_id = #{nsuser_id}
+    </select>
+
+    <select id="getOneMessage" resultMap="replayMap" parameterType="long">
+        SELECT
+            *
+        FROM
+            user_cservice_replay
+        WHERE
+            1 = 1
+          AND last_id = #{id}
+    </select>
+
+    <select id="judgeExistFirstMessage" parameterType="long" resultMap="replayMap">
+        SELECT
+            *
+        FROM
+            user_cservice_replay
+        WHERE
+            nsuser_id = #{nsuser_id}
+    </select>
+
+    <select id="judgeExistLastMessage" parameterType="long" resultMap="replayMap">
+        SELECT
+            *
+        FROM
+            user_cservice_replay
+        WHERE
+            last_id = #{id}
+    </select>
+
+</mapper>
