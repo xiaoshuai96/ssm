@@ -36,5 +36,14 @@
         金额：<input type="number" name="money"/><br/>
         <input type="submit" value="更新"/><br/>
     </form><br/>
+
+
+    <h3 style="color: darkblue">发送消息</h3><br/>
+    <form  action="replay/save" method="post">
+        nsuserId：<input type="number" name="nsuserId"/><br/>
+        text：<input type="text" name="text"/><br/>
+        lastId：<input type="number" name="lastId"/><br/>
+        <input type="submit" value="发送"/><br/>
+    </form><br/>
 </body>
 </html>

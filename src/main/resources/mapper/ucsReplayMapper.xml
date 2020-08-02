@@ -50,5 +50,16 @@
         WHERE
             last_id = #{id}
     </select>
+    
+    <insert id="insertNewMessage">
+        INSERT INTO user_cservice_replay (
+            nsuser_id,
+            text,
+            replay_time,
+            last_id
+        )
+        VALUES
+            (#{nsuserId},#{text},#{date},#{lastId})
+    </insert>
 
 </mapper>

@@ -4,6 +4,9 @@ import com.xiaoshuai885.domain.userCserviceReplay;
 import com.xiaoshuai885.service.ucsReplayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
+
 @Service
 public class ucsReplayServiceImpl implements ucsReplayService {
     @Autowired
@@ -29,6 +32,11 @@ public class ucsReplayServiceImpl implements ucsReplayService {
 //            return null;
 //        }
         return replayDao.getOneMessage(id);
+    }
+
+    @Override
+    public boolean saveMessage(Long nsuserId, String text, Date date, Long lastId) {
+        return replayDao.insertNewMessage(nsuserId,text,date,lastId);
     }
 
 }

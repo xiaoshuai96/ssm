@@ -1,6 +1,9 @@
 package com.xiaoshuai885.dao;
 
 import com.xiaoshuai885.domain.userCserviceReplay;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
 
 public interface ucsReplayMapper {
     /**
@@ -30,4 +33,17 @@ public interface ucsReplayMapper {
      * @return
      */
     userCserviceReplay judgeExistLastMessage(Long lastId);
+
+    /**
+     * 将两人聊天记录保存下来
+     * @param nsuserId
+     * @param text
+     * @param date
+     * @param lastId
+     * @return
+     */
+    boolean insertNewMessage(@Param("nsuserId") Long nsuserId,
+                          @Param("text") String text,
+                          @Param("date") Date date,
+                          @Param("lastId") Long lastId);
 }
